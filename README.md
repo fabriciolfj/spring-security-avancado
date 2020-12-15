@@ -14,6 +14,7 @@ Conforme aumenta-se a complexidade do sistema, faz necessário implantar um serv
 Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no exemplo:
 
 - Autenticação quebrada
+  - quando um indivíduo com más intenções, de alguma forma ganha acesso a funcionalidade ou dados que não pertencem a ele.
 - Fixação de sessão
 - Scripting cross-site (XSS)
 - Falsificação de solicitações(CSRF)
