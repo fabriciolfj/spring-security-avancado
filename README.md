@@ -24,3 +24,6 @@ Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no e
 - Injeção sensíveis d exposição de dados.
 - Falta de controlede acesso ao método
 - Usando dependência com vulnerabilidades conhecidas.
+
+##### Arquitetura
+Dependente da arquitetura implementada, a abordagem relacionada a segurança muda.
