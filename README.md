@@ -10,7 +10,7 @@ Conforme aumenta-se a complexidade do sistema, faz necessário implantar um serv
 ##### CSRF
 - Falsificação de solicitação entre sites.
 
-###### Vulnerabilidades
+##### Vulnerabilidades
 Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no exemplo:
 
 - Autenticação quebrada
