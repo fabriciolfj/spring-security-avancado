@@ -29,3 +29,8 @@ Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no e
 Dependente da arquitetura implementada, a abordagem relacionada a segurança muda.
  - Arquitetura mvc sem separação entre backend e frontend: lidar com vulnerabilidades relacionadas a cors e csrf.
  - Arquitetura mvc com separação entre backend e frontend: problemas relacionados a cors (origem) são mais desafiadoras.
+
+### Oauth2
+Define 2 entidades separadas, o servdor de autorização e o servidor de recursos.
+- Servidor de autorização: fornecer um token que especifique, entre outras coisas, um conjunto de privilégios que eles possam usar.
+- Servidor de recursos: os privilégios que o usuario pode usar, diante autorização.
