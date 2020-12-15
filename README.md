@@ -19,6 +19,7 @@ Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no e
   - permite que um invasor se passe por um usuário válido, reutilizando um id de sessão gerado anteriormente.
   - durante o processo de autenticação, o aplicativo web não atribuir um id de sessão exclusivo, isso pode potencialmente levar a reutilização dos ids de sessão anteriores.
 - Scripting cross-site (XSS)
+  - quando sites permitem a postagem de scripts.
 - Falsificação de solicitações(CSRF)
 - Injeção sensíveis d exposição de dados.
 - Falta de controlede acesso ao método
