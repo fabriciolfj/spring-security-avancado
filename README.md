@@ -6,3 +6,6 @@ Está relacionado a segurança nivel de aplicativo, ou seja, refere-se a tudo qu
 - autorização: após autenticado, o que o usuário pode fazer.
  
 Conforme aumenta-se a complexidade do sistema, faz necessário implantar um serviço epecífico, relacionado a autenticação e autorização.
+
+##### CSRF
+- Falsificação de solicitação entre sites.
