@@ -17,6 +17,7 @@ Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no e
   - quando um indivíduo com más intenções, de alguma forma ganha acesso a funcionalidade ou dados que não pertencem a ele.
 - Fixação de sessão
   - permite que um invasor se passe por um usuário válido, reutilizando um id de sessão gerado anteriormente.
+  - durante o processo de autenticação, o aplicativo web não atribuir um id de sessão exclusivo, isso pode potencialmente levar a reutilização dos ids de sessão anteriores.
 - Scripting cross-site (XSS)
 - Falsificação de solicitações(CSRF)
 - Injeção sensíveis d exposição de dados.
