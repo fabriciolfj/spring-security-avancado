@@ -27,3 +27,5 @@ Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no e
 
 ##### Arquitetura
 Dependente da arquitetura implementada, a abordagem relacionada a segurança muda.
+ - Arquitetura mvc sem separação entre backend e frontend: lidar com vulnerabilidades relacionadas a cors e csrf.
+ - Arquitetura mvc com separação entre backend e frontend: problemas relacionados a cors (origem) são mais desafiadoras.
