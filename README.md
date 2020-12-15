@@ -9,3 +9,14 @@ Conforme aumenta-se a complexidade do sistema, faz necessário implantar um serv
 
 ##### CSRF
 - Falsificação de solicitação entre sites.
+
+###### Vulnerabilidades
+Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no exemplo:
+
+- Autenticação quebrada
+- Fixação de sessão
+- Scripting cross-site (XSS)
+- Falsificação de solicitações(CSRF)
+- Injeção sensíveis d exposição de dados.
+- Falta de controlede acesso ao método
+- Usando dependência com vulnerabilidades conhecidas.
