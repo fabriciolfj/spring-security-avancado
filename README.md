@@ -16,6 +16,7 @@ Abaixo uma listagem das vulnerabilidades mais comuns, aonde são exploradas no e
 - Autenticação quebrada
   - quando um indivíduo com más intenções, de alguma forma ganha acesso a funcionalidade ou dados que não pertencem a ele.
 - Fixação de sessão
+  - permite que um invasor se passe por um usuário válido, reutilizando um id de sessão gerado anteriormente.
 - Scripting cross-site (XSS)
 - Falsificação de solicitações(CSRF)
 - Injeção sensíveis d exposição de dados.
