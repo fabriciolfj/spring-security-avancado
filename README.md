@@ -34,3 +34,8 @@ Dependente da arquitetura implementada, a abordagem relacionada a segurança mud
 Define 2 entidades separadas, o servdor de autorização e o servidor de recursos.
 - Servidor de autorização: fornecer um token que especifique, entre outras coisas, um conjunto de privilégios que eles possam usar.
 - Servidor de recursos: os privilégios que o usuario pode usar, diante autorização.
+
+### Comunicação entre backends
+- Usar chave estáticas no cabeçalho da requisição e response.
+- Solicitações criptográfadas.
+- Validando endereço de ip.
