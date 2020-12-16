@@ -39,3 +39,10 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 - Usar chave estáticas no cabeçalho da requisição e response.
 - Solicitações criptográfadas.
 - Validando endereço de ip.
+
+## Componentes pŕe configurados (em ordem)
+- Authentication filter -> delega a solicitação de autenticação ao gerenciador (authentication manager)
+- Authentication manager -> usa o provedor de autenticação para processar a autenticação.
+- Authentication provider -> implementa a lógica de autenticação.
+- Password encoder -> implementa o gerenciamento de senhas, que o provedor de autenticação usa na lógica.
+- Security context -> mantem os dados de autenticação após o processo.
