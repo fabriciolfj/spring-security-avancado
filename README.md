@@ -44,5 +44,5 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 - Authentication filter -> delega a solicitação de autenticação ao gerenciador (authentication manager)
 - Authentication manager -> usa o provedor de autenticação para processar a autenticação.
 - Authentication provider -> implementa a lógica de autenticação.
-- Password encoder -> implementa o gerenciamento de senhas, que o provedor de autenticação usa na lógica.
+- Password encoder -> implementa o gerenciamento de senhas, que o provedor de autenticação usa na lógica. (codifica a senha e verifica se ela corresponde a uma codificação existente).
 - Security context -> mantem os dados de autenticação após o processo.
