@@ -50,6 +50,8 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 ##### Configuração
 - Existem várias maneiras de realizar configurações na aplicação, mas devemos escolher e manter uma abordagem, para ajudar a tornar o código mais limpo e fácil de entender.
 
-##### UserDetailsService e UserDetailsManager
+##### Mais componentes
 - UserDetailsService: responsável por recuperar os dados do usuario.
 - UserDetailsManager: responsável por adicionar, modificar ou excluir o usuário.
+- UserDetails: Interface que identifica a classe que o spring reconhecerá, para validar o usuário (autenticar).
+- GrantedAuthority: Aonde ficam armazenradas as autorizações.
