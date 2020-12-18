@@ -3,3 +3,10 @@ server:
     key-store-password: teste
     key-store-type: PKCS12
     key-store: classpath:certificate.p12
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring
+    username: root
+    password: root
+    initialization-mode: always
