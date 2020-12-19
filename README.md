@@ -57,3 +57,6 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 - GrantedAuthority: Aonde ficam armazenradas as autorizações.
 - JdbcUserDetailsManager: função igual ao userdetailsmanager, mas se conecta (independentemente de outra lib) a uma base de dados.
 - DelegationPasswordEncoder: implementa a interface passwordencoder, mas delega a outra instância a implementação do contrato.
+
+##### SSCM
+Spring security crypto, que é parte do spring que cuida da criptografia.
