@@ -59,4 +59,4 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 - DelegationPasswordEncoder: implementa a interface passwordencoder, mas delega a outra instância a implementação do contrato.
 
 ##### SSCM
-Spring security crypto, que é parte do spring que cuida da criptografia.
+Spring security crypto, que é parte do spring que cuida da criptografia, ou seja, gera criptografadores que são objetos utilitários que ajudam você a aplicar criptografia e descriptografia de dados.
