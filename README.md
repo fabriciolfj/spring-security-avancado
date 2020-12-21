@@ -60,3 +60,9 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 
 ##### SSCM
 Spring security crypto, que é parte do spring que cuida da criptografia, ou seja, gera criptografadores que são objetos utilitários que ajudam você a aplicar criptografia e descriptografia de dados.
+
+###### Representação da solicitação
+O contrato que representa a solicitação de autenticação/autorização, chama-se Authentication, que extende a classe Principal do api security do java. Contem os seguintes atributos:
+- isAuthenticated() -> retorna true se o processo de autenticação terminou ou false se ainda está em andamento.
+- getCredentials() -> retorna o password ou chave secreta usada no processo de autenticação.
+- getAuthorities() -> retorna uma coleção de autorizações concedidas para a solicitação.
