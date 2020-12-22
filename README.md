@@ -80,3 +80,4 @@ Uma vez que o authentication manager conclui o processo de autenticação com su
   - MODE_INHERITABLETHREADLOCAL: similar ao mode threadlocal mas permite copiar o contexto para a próxima thread, em caso de metodo assíncrono.
   - MODE_GLOBAL:  faz com que todas as threads do aplicativo, vejam a mesma instância de contexto.
   - DelegatingSecurityContextRunnable/DelegatingSecurityContextCallable: quando possui novas threads, não gerenciadas pelo contexto (spring), mas gostaria de encaminhar o contexto de segurança para elas.
+Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecurityContextExecutorService, afim de propagar o contexto de segurança.  
