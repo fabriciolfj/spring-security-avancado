@@ -88,4 +88,5 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 É a autenticação padrão do spring security e mais simples, não indicado para ambiente produtivo.  Podemos personalizar o basic authentication, utilizando os pontos abaixo:
 - formLogin: habilitar um formulário web padrão, com usuario e senha. 
 - AuthenticationEntryPoint: personalizar a resposta de erro (caso login falhe).
-- AuthenticationSuccessHandler: personalizar a lógica de autenticação.
+- AuthenticationSuccessHandler: personalizar a lógica de autenticação (usado no fluxo do formlogin).
+- AuthenticationFailureHandler: personalizar a lógica em caso de erro de autenticação (usado no fluxo do formlogin).
