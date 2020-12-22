@@ -43,7 +43,7 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 ## Componentes pré-configurados (em ordem)
 - Authentication filter -> delega a solicitação de autenticação ao gerenciador (authentication manager)
 - Authentication manager -> usa o provedor de autenticação para processar a autenticação.
-- Authentication provider -> implementa a lógica de autenticação; (recebe a solicitação do authentication managere delega em um userdetailsservice, verificando a senha de um passwordencoder)
+- Authentication provider -> implementa a lógica de autenticação; (recebe a solicitação vinda do authentication manager (contrato authentication) e delega em um userdetailsservice, verificando a senha de um passwordencoder)
 - Password encoder -> implementa o gerenciamento de senhas, que o provedor de autenticação usa na lógica. (codifica a senha e verifica se ela corresponde a uma codificação existente).
 - Security context -> mantem os dados de autenticação após o processo.
 
@@ -60,3 +60,23 @@ Define 2 entidades separadas, o servdor de autorização e o servidor de recurso
 
 ##### SSCM
 Spring security crypto, que é parte do spring que cuida da criptografia, ou seja, gera criptografadores que são objetos utilitários que ajudam você a aplicar criptografia e descriptografia de dados.
+
+##### Representação da solicitação
+O contrato que representa a solicitação de autenticação/autorização, chama-se Authentication, que extende a classe Principal do api security do java. Contem os seguintes atributos:
+- isAuthenticated() -> retorna true se o processo de autenticação terminou ou false se ainda está em andamento.
+- getCredentials() -> retorna o password ou chave secreta usada no processo de autenticação.
+- getAuthorities() -> retorna uma coleção de autorizações concedidas para a solicitação.
+
+##### Detalhes do funcionamento do authentication provider
+- authentication manager receber o contrato authentication
+- verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar).
+- caso authentication suporte, ele executa a validação, caso não, retorna null.
+- caso positivo, segue com a solicitação, caso negativo solta a exceção.
+
+##### Spring context
+Uma vez que o authentication manager conclui o processo de autenticação com sucesso, ele armazena a instância de autenticação para o restada solicitação.
+- O spring security oferece três estratégias para gerenciar o spring context:
+  - MODE_THREADLOCAL: cada thread armazena seus próprios detalhes no contexto (por solicitação).
+  - MODE_INHERITABLETHREADLOCAL: similar ao mode threadlocal mas permite copiar o contexto para a próxima thread, em caso de metodo assíncrono.
+  - MODE_GLOBAL:  faz com que todas as threads do aplicativo, vejam a mesma instância de contexto.
+  - DelegatingSecurityContextRunnable/DelegatingSecurityContextCallable: quando possui novas threads, não gerenciadas pelo contexto (spring), mas gostaria de encaminhar o contexto de segurança para elas.
