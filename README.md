@@ -75,3 +75,7 @@ O contrato que representa a solicitação de autenticação/autorização, chama
 
 ##### Spring context
 Uma vez que o authentication manager conclui o processo de autenticação com sucesso, ele armazena a instância de autenticação para o restada solicitação.
+- O spring security oferece três estratégias para gerenciar o spring context:
+  - MODE_THREADLOCAL: cada thread armazena seus próprios detalhes no contexto (por solicitação).
+  - MODE_INHERITABLETHREADLOCAL: similar ao mode threadlocal mas permite copiar o contexto para a próxima thread, em caso de metodo assíncrono.
+  - MODE_GLOBAL:  faz com que todas as threads do aplicativo, vejam a mesma instância de contexto.
