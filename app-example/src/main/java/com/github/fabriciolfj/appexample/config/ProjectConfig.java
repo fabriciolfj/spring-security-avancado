@@ -1,7 +1,14 @@
 package com.github.fabriciolfj.appexample.config;
 
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
@@ -15,7 +22,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class ProjectConfig {
+@EnableAsync
+public class ProjectConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    public InitializingBean initializingBean() {
+        return () -> SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
+    }
+
+    @Autowired
+    private AuthenticationProvider authenticationProvider;
 
     @Bean
     public UserDetailsService userDetailsService(final DataSource dataSource) {
@@ -33,6 +49,10 @@ public class ProjectConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider);
+    }
 
     /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

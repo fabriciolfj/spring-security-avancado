@@ -1,5 +1,10 @@
 package com.github.fabriciolfj.appexample.controller;
 
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.concurrent.DelegatingSecurityContextCallable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -7,18 +12,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 @RequestMapping("/hello")
 @RestController
 public class HelloWorldController {
 
     @GetMapping
-    public String hello() {
-        String salt = KeyGenerators.string().generateKey();
-        String password = "secret";
-        String valueToEncrypt = "HELLO";
-        TextEncryptor e = Encryptors.queryableText(password, salt);
-        String encrypted1 = e.encrypt(valueToEncrypt);
+    public String hello(Authentication a) {
+        /*SecurityContext context = SecurityContextHolder.getContext();
+        Authentication a  = context.getAuthentication();*/
+        return "Hello, " + a.getName() + "!";
+    }
 
-        return encrypted1;
+    @GetMapping("/bye")
+    @Async
+    public void goodbye() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String username= context.getAuthentication().getName();
+        System.out.println("Usuario autenticado: " + username);
+    }
+
+    @GetMapping("/ciao")
+    public String ciao() throws Exception {
+        Callable<String> task = () -> {
+            SecurityContext context = SecurityContextHolder.getContext();
+            return context.getAuthentication().getName();
+        };
+
+        ExecutorService e = Executors.newCachedThreadPool();
+
+        try {
+            var contextTask = new DelegatingSecurityContextCallable<>(task);
+            return "Ciao, " + e.submit(contextTask).get() + "!";
+        } finally {
+            e.shutdown();
+        }
     }
 }
