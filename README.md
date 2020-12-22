@@ -72,3 +72,6 @@ O contrato que representa a solicitação de autenticação/autorização, chama
 - verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar).
 - caso authentication suporte, ele executa a validação, caso não, retorna null.
 - caso positivo, segue com a solicitação, caso negativo solta a exceção.
+
+##### Spring context
+Uma vez que o authentication manager conclui o processo de autenticação com sucesso, ele armazena a instância de autenticação para o restada solicitação.
