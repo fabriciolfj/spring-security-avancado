@@ -80,3 +80,13 @@ Uma vez que o authentication manager conclui o processo de autenticação com su
   - MODE_INHERITABLETHREADLOCAL: similar ao mode threadlocal mas permite copiar o contexto para a próxima thread, em caso de metodo assíncrono.
   - MODE_GLOBAL:  faz com que todas as threads do aplicativo, vejam a mesma instância de contexto.
   - DelegatingSecurityContextRunnable/DelegatingSecurityContextCallable: quando possui novas threads, não gerenciadas pelo contexto (spring), mas gostaria de encaminhar o contexto de segurança para elas.
+
+Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecurityContextExecutorService, afim de propagar o contexto de segurança.  
+
+
+##### Basic authentication
+É a autenticação padrão do spring security e mais simples, não indicado para ambiente produtivo.  Podemos personalizar o basic authentication, utilizando os pontos abaixo:
+- formLogin: habilitar um formulário web padrão, com usuario e senha. 
+- AuthenticationEntryPoint: personalizar a resposta de erro (caso login falhe).
+- AuthenticationSuccessHandler: personalizar a lógica de autenticação (usado no fluxo do formlogin).
+- AuthenticationFailureHandler: personalizar a lógica em caso de erro de autenticação (usado no fluxo do formlogin).
