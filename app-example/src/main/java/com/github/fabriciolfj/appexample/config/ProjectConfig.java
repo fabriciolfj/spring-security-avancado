@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +25,12 @@ import java.util.Map;
 @Configuration
 @EnableAsync
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
     public InitializingBean initializingBean() {
@@ -47,6 +54,24 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
         return new DelegatingPasswordEncoder("bcrypt", encoders);*/
         return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic(c -> {
+            c.realmName("OTHER");
+            c.authenticationEntryPoint(new CustomEntryPoint());
+        });
+
+        http.formLogin()
+                .successHandler(customAuthenticationSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler)
+                .and()
+                .httpBasic();
+
+        http.authorizeRequests()
+                .anyRequest()
+                .authenticated();
     }
 
     @Override

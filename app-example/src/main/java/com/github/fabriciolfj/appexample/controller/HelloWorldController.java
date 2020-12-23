@@ -2,6 +2,7 @@ package com.github.fabriciolfj.appexample.controller;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.concurrent.DelegatingSecurityContextCallable;
+import org.springframework.security.concurrent.DelegatingSecurityContextExecutorService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +34,23 @@ public class HelloWorldController {
         SecurityContext context = SecurityContextHolder.getContext();
         String username= context.getAuthentication().getName();
         System.out.println("Usuario autenticado: " + username);
+    }
+
+    @GetMapping("/hola")
+    public String hola() throws Exception {
+        Callable<String> task = () -> {
+            SecurityContext context = SecurityContextHolder.getContext();
+            return context.getAuthentication().getName();
+        };
+
+        ExecutorService e = Executors.newCachedThreadPool();
+        e = new DelegatingSecurityContextExecutorService(e);
+
+        try {
+            return "Hola, " + e.submit(task).get() + "!";
+        } finally {
+            e.shutdown();
+        }
     }
 
     @GetMapping("/ciao")
