@@ -91,3 +91,6 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - AuthenticationEntryPoint: personalizar a resposta de erro (caso login falhe).
 - AuthenticationSuccessHandler: personalizar a lógica de autenticação (usado no fluxo do formlogin).
 - AuthenticationFailureHandler: personalizar a lógica em caso de erro de autenticação (usado no fluxo do formlogin).
+
+##### GrantedAuthority
+- Representação das autorizações/papeis do usuário.
