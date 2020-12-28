@@ -95,3 +95,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ##### GrantedAuthority
 - Representação das autorizações/papeis do usuário.
 - Uma autorização é uma ação que o usuário pode executar com um recurso do sistema.
+- Para aplicar o uso da autorização, possui-se as anotações: hasAuthority() e hasAnyAuthority()
