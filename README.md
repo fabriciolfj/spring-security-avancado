@@ -93,6 +93,9 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - AuthenticationFailureHandler: personalizar a lógica em caso de erro de autenticação (usado no fluxo do formlogin).
 
 ##### GrantedAuthority
-- Representação das autorizações/papeis do usuário.
+- Representação das autorizações do usuário.
 - Uma autorização é uma ação que o usuário pode executar com um recurso do sistema.
 - Para aplicar o uso da autorização, possui-se as anotações: hasAuthority(), access() que recebe uma SPEL e hasAnyAuthority()
+
+##### Roles x Authorities
+- Uma role pode ter várias authorities. Exemplo: ADMIN (role) pode (authorities) ler, escrever, apagar e etc.
