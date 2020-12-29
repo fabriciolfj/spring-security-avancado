@@ -95,7 +95,8 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ##### GrantedAuthority
 - Representação das autorizações do usuário.
 - Uma autorização é uma ação que o usuário pode executar com um recurso do sistema.
-- Para aplicar o uso da autorização, possui-se as anotações: hasAuthority(), access() que recebe uma SPEL e hasAnyAuthority()
+- Para aplicar o uso da autorização, existe os seguintes recursos: hasAuthority(), access() que recebe uma SPEL e hasAnyAuthority()
+- Para aplicar roles, existe os seguintes recursos: hasRole(), hasAnyRole() e access().
 
 ##### Roles x Authorities
 - Uma role pode ter várias authorities. Exemplo: ADMIN (role) pode (authorities) ler, escrever, apagar e etc.
