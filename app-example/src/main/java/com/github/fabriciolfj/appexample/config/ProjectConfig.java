@@ -10,12 +10,14 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
@@ -42,7 +44,23 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService(final DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
+        //return new JdbcUserDetailsManager(dataSource);
+        var manager =  new InMemoryUserDetailsManager();
+        var user1 = User.withUsername("john")
+                                        .password("12345")
+                                        //.authorities("WRITE")
+                                        .roles("ADMIN")
+                                        .build();
+
+        var user2 = User.withUsername("jane")
+                                    .password("12345")
+                                    //.authorities("READ")
+                                    .roles("MANAGER")
+                                    .build();
+
+        manager.createUser(user1);
+        manager.createUser(user2);
+        return manager;
     }
 
     @Bean
@@ -58,7 +76,7 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic(c -> {
+        /*http.httpBasic(c -> {
             c.realmName("OTHER");
             c.authenticationEntryPoint(new CustomEntryPoint());
         });
@@ -71,7 +89,14 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .anyRequest()
-                .authenticated();
+                .authenticated();*/
+
+        //String expression = "hasAuthority('read') and !hasAuthority('delete')";
+
+        http.httpBasic();
+        http.authorizeRequests()
+                .anyRequest()
+                .hasRole("ADMIN");
     }
 
     @Override
