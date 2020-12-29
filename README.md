@@ -99,3 +99,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 
 ##### Roles x Authorities
 - Uma role pode ter várias authorities. Exemplo: ADMIN (role) pode (authorities) ler, escrever, apagar e etc.
+- Ao atribuir uma role, inicie com o prefixo ROLE_.
