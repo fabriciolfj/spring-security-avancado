@@ -113,7 +113,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
                 .hasRole("ADMIN");
   
   ```
-  - mvnMathers("/path") restringe o acesso a um determinado endpoint, com base no regex informado.
+  - mvnMathers("/path") restringe o acesso a um determinado endpoint, com base no regex informado. obs: caso use apenas os mvnMathers, o caminho não especificado nele, ficará acessivel a todos os usuários, mesmo os não autenticados.
   ```
           http.authorizeRequests()
                 .mvcMatchers("/hello")
