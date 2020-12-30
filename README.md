@@ -105,4 +105,19 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ###### Restrições com uso de matchers
 - Restringir o acesso a algum path ou verbo http, dependendo da autorização do usuário.
 - Existem algumas configurações, tais como:
-  - anyRequest() autoriza qualquer solicitação
+  - anyRequest() autoriza qualquer solicitação, para um critério especifico
+  
+  ```
+          http.authorizeRequests()
+                .anyRequest()
+                .hasRole("ADMIN");
+  
+  ```
+  - mvnMathers("/path") restringe o acesso a um determinado endpoint, com base no regex informado.
+  ```
+          http.authorizeRequests()
+                .mvcMatchers("/hello")
+                .hasRole("ADMIN")
+                .mvcMatchers("/ciao")
+                .hasRole("MANAGER");
+  ```
