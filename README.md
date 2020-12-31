@@ -101,3 +101,35 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ##### Roles x Authorities
 - Uma role pode ter várias authorities. Exemplo: ADMIN (role) pode (authorities) ler, escrever, apagar e etc.
 - Ao atribuir uma role, inicie com o prefixo ROLE_, caso use o metodo authorities se for role, não necessita.
+
+##### Restrições com uso de mvcMatchers
+- Restringir o acesso a algum path ou verbo http, dependendo da autorização do usuário.
+- Existem algumas configurações, tais como:
+  - anyRequest() autoriza qualquer solicitação, para um critério especifico
+  
+  ```
+          http.authorizeRequests()
+                .anyRequest()
+                .hasRole("ADMIN");
+  
+  ```
+  - mvnMathers("/path") restringe o acesso a um determinado endpoint, com base no regex informado. obs: caso use apenas os mvnMathers, o caminho não especificado nele, ficará acessivel a todos os usuários, mesmo os não autenticados.
+  ```
+          http.authorizeRequests()
+                .mvcMatchers("/hello")
+                .hasRole("ADMIN")
+                .mvcMatchers("/ciao")
+                .hasRole("MANAGER");
+  ```
+ - Atenção ao uso de mathers, a ordem das regras deve ser particular para geral. Por isso o método anyRequest() não pode ser chamado antes do método matcher específico, como mvcMatchers().
+ 
+ ##### Restrições com antMatchers
+ - Existem 3 formas de usar o antMachers:
+   - antMatchers(HttpMethod, String patterns): metodo http e caminho do endpoint
+   - antMatchers(String): caminho do endpoint
+   - antMatchers(String): método http.
+ - Diferença entre o mvcMatchers: mvcMatchers ele protege o caminho especificado e qualquer coisa adicionada acima. Exemplo: protegi o caminho /hello, mas adicionei /heelo/test, ambos estão protegidos. No antMachers isso não ocorre, apenas /hello ficaria protegido.
+
+##### Observação importante
+- Caso você possua um endpoint exposto, autorizado para qualquer usuário, se fornecer usuário e senha válidos, será encaminhado para o recurso, caso não informe nenhum usuário, será encaminhado para o recuso, no entando se informar um usuário e senha inválido, receberá um codigo 401. Porquê? Lembre-se, o permiteAll se refere a autorização, que é executado após a autenticação, o filter intercepta a solicitação e a valida, caso ok, encaminha para o processo de autorização, caso negativo, retorna 401.
+- Caso queria que todos os endpoints sejam acessíveis apenas por usuários autenticados, use o recurso anyRequest(0.authenticated().
