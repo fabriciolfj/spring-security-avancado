@@ -125,3 +125,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 
 ##### Observação importante
 - Caso você possua um endpoint exposto, autorizado para qualquer usuário, se fornecer usuário e senha válidos, será encaminhado para o recurso, caso não informe nenhum usuário, será encaminhado para o recuso, no entando se informar um usuário e senha inválido, receberá um codigo 401. Porquê? Lembre-se, o permiteAll se refere a autorização, que é executado após a autenticação, o filter intercepta a solicitação e a valida, caso ok, encaminha para o processo de autorização, caso negativo, retorna 401.
+- Caso queria que todos os endpoints sejam acessíveis apenas por usuários autenticados, use o recurso anyRequest(0.authenticated().
