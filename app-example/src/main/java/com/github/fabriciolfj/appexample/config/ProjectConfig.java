@@ -4,6 +4,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -94,9 +95,20 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         //String expression = "hasAuthority('read') and !hasAuthority('delete')";
 
         http.httpBasic();
+        http.csrf().disable();
         http.authorizeRequests()
-                .anyRequest()
-                .hasRole("ADMIN");
+                .mvcMatchers("/hello")
+                .authenticated();
+                //.mvcMatchers("/product/{code:^[0-9]*$}")// nesse path, quero que receba apenas digitos, caso aparece letras negue
+                //.permitAll()
+                //.anyRequest().denyAll();
+                //.mvcMatchers(HttpMethod.GET, "/a").authenticated()
+                //.mvcMatchers(HttpMethod.POST, "/a").permitAll()
+                //.mvcMatchers("/a/b/**")
+                //.authenticated()
+                //.anyRequest()
+                //.permitAll();
+                //.denyAll();
     }
 
     @Override
