@@ -102,7 +102,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - Uma role pode ter várias authorities. Exemplo: ADMIN (role) pode (authorities) ler, escrever, apagar e etc.
 - Ao atribuir uma role, inicie com o prefixo ROLE_, caso use o metodo authorities se for role, não necessita.
 
-##### Restrições com uso de matchers
+##### Restrições com uso de mvcMatchers
 - Restringir o acesso a algum path ou verbo http, dependendo da autorização do usuário.
 - Existem algumas configurações, tais como:
   - anyRequest() autoriza qualquer solicitação, para um critério especifico
@@ -128,7 +128,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
    - antMatchers(HttpMethod, String patterns): metodo http e caminho do endpoint
    - antMatchers(String): caminho do endpoint
    - antMatchers(String): método http.
- - Diferença entre o matchers: matchers ele protege o caminho especificado e qualquer coisa adicionada acima. Exemplo: protegi o caminho /hello, mas adicionei /heelo/test, ambos estão protegidos. No antMachers isso não ocorre, apenas /hello ficaria protegido.
+ - Diferença entre o mvcMatchers: mvcMatchers ele protege o caminho especificado e qualquer coisa adicionada acima. Exemplo: protegi o caminho /hello, mas adicionei /heelo/test, ambos estão protegidos. No antMachers isso não ocorre, apenas /hello ficaria protegido.
 
 ##### Observação importante
 - Caso você possua um endpoint exposto, autorizado para qualquer usuário, se fornecer usuário e senha válidos, será encaminhado para o recurso, caso não informe nenhum usuário, será encaminhado para o recuso, no entando se informar um usuário e senha inválido, receberá um codigo 401. Porquê? Lembre-se, o permiteAll se refere a autorização, que é executado após a autenticação, o filter intercepta a solicitação e a valida, caso ok, encaminha para o processo de autorização, caso negativo, retorna 401.
