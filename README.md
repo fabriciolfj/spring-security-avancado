@@ -102,7 +102,11 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - Uma role pode ter várias authorities. Exemplo: ADMIN (role) pode (authorities) ler, escrever, apagar e etc.
 - Ao atribuir uma role, inicie com o prefixo ROLE_, caso use o metodo authorities se for role, não necessita.
 
-###### Restrições com uso de matchers
+##### Restrições com uso de matchers
+- Existem 3 formas de usar o antMachers:
+   - antMatchers(HttpMethod, String patterns): metodo http e caminho do endpoint
+   - antMatchers(String): caminho do endpoint
+   - antMatchers(String): método http.
 - Restringir o acesso a algum path ou verbo http, dependendo da autorização do usuário.
 - Existem algumas configurações, tais como:
   - anyRequest() autoriza qualquer solicitação, para um critério especifico
