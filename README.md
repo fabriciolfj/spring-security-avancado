@@ -128,7 +128,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
    - antMatchers(HttpMethod, String patterns): metodo http e caminho do endpoint
    - antMatchers(String): caminho do endpoint
    - antMatchers(String): método http.
- - Diferença entre o mvcMatchers: mvcMatchers ele protege o caminho especificado e qualquer coisa adicionada acima. Exemplo: protegi o caminho /hello, mas adicionei /heelo/test, ambos estão protegidos. No antMachers isso não ocorre, apenas /hello ficaria protegido.
+ - Diferença entre o mvcMatchers: mvcMatchers ele protege o caminho especificado e qualquer coisa adicionada acima. Exemplo: protegi o caminho /hello, mas adicionei /hello/test, ambos estão protegidos. No antMachers isso não ocorre, apenas /hello ficaria protegido.
 
 ##### Observação importante
 - Caso você possua um endpoint exposto, autorizado para qualquer usuário, se fornecer usuário e senha válidos, será encaminhado para o recurso, caso não informe nenhum usuário, será encaminhado para o recuso, no entando se informar um usuário e senha inválido, receberá um codigo 401. Porquê? Lembre-se, o permiteAll se refere a autorização, que é executado após a autenticação, o filter intercepta a solicitação e a valida, caso ok, encaminha para o processo de autorização, caso negativo, retorna 401.
