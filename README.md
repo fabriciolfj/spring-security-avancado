@@ -122,3 +122,6 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
                 .hasRole("MANAGER");
   ```
  - Atenção ao uso de mathers, a ordem das regras deve ser particular para geral. Por isso o método anyRequest() não pode ser chamado antes do método matcher específico, como mvcMatchers().
+
+##### Observação importante
+- Caso você possua um endpoint exposto, autorizado para qualquer usuário, se fornecer usuário e senha válidos, será encaminhado para o recurso, caso não informe nenhum usuário, será encaminhado para o recuso, no entando se informar um usuário e senha inválido, receberá um codigo 401. Porquê? Lembre-se, o permiteAll se refere a autorização, que é executado após a autenticação, o filter intercepta a solicitação e a valida, caso ok, encaminha para o processo de autorização, caso negativo, retorna 401.
