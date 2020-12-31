@@ -121,3 +121,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
                 .mvcMatchers("/ciao")
                 .hasRole("MANAGER");
   ```
+ - Atenção ao uso de mathers, a ordem das regras deve ser particular para geral. Por isso o método anyRequest() não pode ser chamado antes do método matcher específico, como mvcMatchers().
