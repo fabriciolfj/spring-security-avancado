@@ -142,3 +142,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ## Filters
 - Filtros http gerenciam cada responsabilidade que deve ser aplicada á solicitação.
 - Os filtros formam uma cadeia de responsabilidades, ou seja, recebe uma solicitação, executa sua lógica e, eventualmente, delega a solicitação para o próximo filtro da cadeia.
+- Para se criar filtros, implementa a interface Filter, a partir do pacote javax.servlet.
