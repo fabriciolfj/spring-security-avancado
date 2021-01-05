@@ -160,4 +160,5 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 
 ## Filters relacionados a CORS e CSRF
 - Relembrando a definição:
-  - CSRF -> ataque de solicitação falsa, ou seja, o usuario se autenticou no aplicativo e o invasor engana o mesmo, fazendo efetuar ações indevidas. (por padrão, spring ativa a proteção csrf para endpoints post).
+  - CSRF -> ataque de solicitação falsa, ou seja, o usuario se autenticou no aplicativo e o invasor engana o mesmo, fazendo efetuar ações indevidas. (por padrão, spring ativa a proteção csrf para endpoints post). 
+  - Proteção CSRF -> Spring security utiliza seu mecanismo de token, para proteger os endpotins de ataques csrf.
