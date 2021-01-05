@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -43,20 +44,23 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
+    @Autowired
+    private StaticKeyAuthenticationFilter filter;
+
     @Bean
     public UserDetailsService userDetailsService(final DataSource dataSource) {
         //return new JdbcUserDetailsManager(dataSource);
         var manager =  new InMemoryUserDetailsManager();
         var user1 = User.withUsername("john")
                                         .password("12345")
-                                        //.authorities("WRITE")
-                                        .roles("ADMIN")
+                                        .authorities("read", "premium")
+                                        //.roles("ADMIN")
                                         .build();
 
         var user2 = User.withUsername("jane")
                                     .password("12345")
-                                    //.authorities("READ")
-                                    .roles("MANAGER")
+                                    .authorities("read")
+                                    //.roles("MANAGER")
                                     .build();
 
         manager.createUser(user1);
@@ -77,6 +81,15 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterAt(filter, BasicAuthenticationFilter.class) //colocar o filter na mesma posição
+                .authorizeRequests()
+                .anyRequest().permitAll();
+
+        /*http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class)
+                .authorizeRequests()
+                .anyRequest().permitAll();*/
+
         /*http.httpBasic(c -> {
             c.realmName("OTHER");
             c.authenticationEntryPoint(new CustomEntryPoint());
@@ -86,7 +99,7 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(customAuthenticationSuccessHandler)
                 .failureHandler(customAuthenticationFailureHandler)
                 .and()
-                .httpBasic();
+                .httpBasic(); // add o filtro BasicAuthenticationFilter
 
         http.authorizeRequests()
                 .anyRequest()
@@ -94,11 +107,15 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
         //String expression = "hasAuthority('read') and !hasAuthority('delete')";
 
-        http.httpBasic();
-        http.csrf().disable();
-        http.authorizeRequests()
-                .mvcMatchers("/hello")
-                .authenticated();
+        //http.httpBasic();
+        //http.csrf().disable();
+        //http.authorizeRequests()
+          //      .regexMatchers(".*/(us|br)+/(en|br).*")
+            //    .authenticated()
+              //  .anyRequest() //para todos os outros endpoints
+                //.hasAuthority("premium"); //precisa de autorizacao premium
+                //.mvcMatchers("/hello")
+                //.authenticated();
                 //.mvcMatchers("/product/{code:^[0-9]*$}")// nesse path, quero que receba apenas digitos, caso aparece letras negue
                 //.permitAll()
                 //.anyRequest().denyAll();
