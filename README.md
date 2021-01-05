@@ -148,3 +148,10 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - Existem alguns filtros padrões como: BasicAuthenticationFilter (autenticação, ja utilizada por default), CsrfFilter(requisição falsa), CorsFilter (origem cruzada).
 - Podemos adicionar um filtro para localizar outro filtro, isso ocorre quando queremos reaproveitar alguma lógica já implementada.
 - Podemos também adicionar um filtro na mesma ordem ou posição de outro, nesse caso o spring não garante a ordem de execução.
+- Podemos tambem adicionar um filtro na posição do outro, sem declarar este: 
+```
+        http.addFilterAt(filter, BasicAuthenticationFilter.class) //colocar o filter na mesma posição, mas nao estou add o filtro BasicAuthentication, para isso preciso declarar httpBasic()
+                .authorizeRequests()
+                .anyRequest().permitAll();
+
+```
