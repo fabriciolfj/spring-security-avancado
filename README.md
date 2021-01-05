@@ -166,5 +166,6 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 #### CsrfFilter
 - Intercepta a solicitação e verifica se existe o token csrf no cabeçalho, para ações que não sejam GET, OPTIONS, TRACE E HEAD.
 - Caso o token não exista, devolve um código http 403 (proibido).
+- O token é gerado na primeira solicitação GET.
 - Os tokens ficam armazenados na sessão HTTP, através do componente CsrfTokenRepository.
 - Token em sua maioria das vezes, são UUIDS, mas podemos personalizar.
