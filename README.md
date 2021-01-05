@@ -157,3 +157,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ```
 #### Classes abstratas
 - Existem alguma classes abstradas, que implementam filter, como: OnPerRequestFilter (garante que o filtro seja chamado apenas uma vez por solicitação (nao funciona para solicitação assincrona, precisa mudar o comportamento via shouldNotFilterAsyncDispatch), por padrão, o spring não garante tal comportamento, caso queira, extenda essa classe).
+
+## Filters relacionados a CORS e CSRF
+- Relembrando a definição:
+  - CSRF -> ataque de solicitação falsa, ou seja, o usuario se autenticou no aplicativo e o invasor engana o mesmo, fazendo efetuar ações indevidas. (por padrão, spring ativa a proteção csrf para endpoints post).
