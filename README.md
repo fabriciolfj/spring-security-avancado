@@ -156,4 +156,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 
 ```
 #### Classes abstratas
-- Existem alguma classes abstradas, que implementam filter, como: OnPerRequestFilter (garante que o filtro seja chamado apenas uma vez por solicitação, por padrão, o spring não garante tal comportamento, caso queira, extenda essa classe).
+- Existem alguma classes abstradas, que implementam filter, como: OnPerRequestFilter (garante que o filtro seja chamado apenas uma vez por solicitação (nao funciona para solicitação assincrona, precisa mudar o comportamento via shouldNotFilterAsyncDispatch), por padrão, o spring não garante tal comportamento, caso queira, extenda essa classe).
