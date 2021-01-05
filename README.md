@@ -155,3 +155,5 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
                 .anyRequest().permitAll();
 
 ```
+#### Classes abstratas
+- Existem alguma classes abstradas, que implementam filter, como: OnPerRequestFilter (garante que o filtro seja chamado apenas uma vez por solicitação).
