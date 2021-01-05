@@ -147,3 +147,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - Podemos personalizar a ordem em que os filtros são executados, atráves da configuração http.addFilterBefore. Por exemplo: quero que meu filtro personalizado seja executado antes do filtro de autenticação: http.addFilterBefore(new Meufiltro(), BasicAuthenticationFilter.class).
 - Existem alguns filtros padrões como: BasicAuthenticationFilter (autenticação, ja utilizada por default), CsrfFilter(requisição falsa), CorsFilter (origem cruzada).
 - Podemos adicionar um filtro para localizar outro filtro, isso ocorre quando queremos reaproveitar alguma lógica já implementada.
+- Podemos também adicionar um filtro na mesma ordem ou posição de outro, nesse caso o spring não garante a ordem de execução.
