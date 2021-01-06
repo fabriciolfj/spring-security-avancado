@@ -21,6 +21,7 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -44,8 +45,8 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
-    @Autowired
-    private StaticKeyAuthenticationFilter filter;
+    /*@Autowired
+    private StaticKeyAuthenticationFilter filter;*/
 
     @Bean
     public UserDetailsService userDetailsService(final DataSource dataSource) {
@@ -81,9 +82,12 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterAt(filter, BasicAuthenticationFilter.class) //colocar o filter na mesma posição
+        http.addFilterAfter(new CsrfTokenLogger(), CsrfFilter.class)
+                .authorizeRequests().anyRequest().permitAll();
+
+        /*http.addFilterAt(filter, BasicAuthenticationFilter.class) //colocar o filter na mesma posição
                 .authorizeRequests()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll();*/
 
         /*http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class)

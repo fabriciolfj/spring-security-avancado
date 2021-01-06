@@ -10,6 +10,7 @@ import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,11 @@ import java.util.concurrent.Executors;
 @RequestMapping("/hello")
 @RestController
 public class HelloWorldController {
+
+    @PostMapping
+    public String hello() {
+        return "Hello post";
+    }
 
     @GetMapping
     public String hello(Authentication a) {
