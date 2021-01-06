@@ -155,3 +155,18 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
                 .anyRequest().permitAll();
 
 ```
+#### Classes abstratas
+- Existem alguma classes abstradas, que implementam filter, como: OnPerRequestFilter (garante que o filtro seja chamado apenas uma vez por solicitação (nao funciona para solicitação assincrona, precisa mudar o comportamento via shouldNotFilterAsyncDispatch), por padrão, o spring não garante tal comportamento, caso queira, extenda essa classe).
+
+## Filters relacionados a CORS e CSRF
+- Relembrando a definição:
+  - CSRF -> ataque de solicitação falsa, ou seja, o usuario se autenticou no aplicativo e o invasor engana o mesmo, fazendo efetuar ações indevidas. (por padrão, spring ativa a proteção csrf para endpoints post). 
+  - Proteção CSRF -> Spring security utiliza seu mecanismo de token, para proteger os endpotins de ataques csrf.
+- Proteção CSRF é indicado quando paginas web fazem requisições ao seu endpoint.
+
+#### CsrfFilter
+- Intercepta a solicitação e verifica se existe o token csrf no cabeçalho, para ações que não sejam GET, OPTIONS, TRACE E HEAD.
+- Caso o token não exista, devolve um código http 403 (proibido).
+- O token é gerado na primeira solicitação GET (armazena usando a sessão como chave, exemplo:  JSESSIONID=18F11F1AD09A4CC3557B7A1D9FB167D7, 00951ba4-ae47-4b8b-8285-b1f4fcc1ddf4
+- Os tokens ficam armazenados na sessão HTTP, através do componente CsrfTokenRepository.
+- Token em sua maioria das vezes, são UUIDS, mas podemos personalizar.
