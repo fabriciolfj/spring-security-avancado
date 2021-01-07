@@ -1,7 +1,27 @@
-<form action="/product/add" method="post">
+<!--<form action="/product/add" method="post">
     <span>Name: </span>
     <span><input type="text" name="name"></span>
     <span><button type="submit">Add</button></span>
 
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-</form>
+</form>-->
+
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+      <script>
+          const http = new XMLHttpRequest();
+          const url = 'http://127.0.0.1:8080/test';
+
+          http.open("POST", url);
+          http.send();
+          http.onreadystatechange = (e) => {
+            document.getElementById("output").innerHTML = http.responseText;
+          }
+      </script>
+  </head>
+  <body>
+    <div id="output"></div>
+  </body>
+
+</html>

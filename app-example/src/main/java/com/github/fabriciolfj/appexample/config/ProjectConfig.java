@@ -23,16 +23,19 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
 @EnableAsync
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+    /*@Autowired
     private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Autowired
@@ -49,12 +52,12 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    private AuthenticationProvider authenticationProvider;
+    private AuthenticationProvider authenticationProvider;*/
 
     /*@Autowired
     private StaticKeyAuthenticationFilter filter;*/
 
-    @Bean
+   /* @Bean
     public UserDetailsService userDetailsService(final DataSource dataSource) {
         //return new JdbcUserDetailsManager(dataSource);
         var manager =  new InMemoryUserDetailsManager();
@@ -73,27 +76,40 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         manager.createUser(user1);
         manager.createUser(user2);
         return manager;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public PasswordEncoder passwordEncoder() {
         /*Map<String, PasswordEncoder> encoders = new HashMap<>();
         encoders.put("noop", NoOpPasswordEncoder.getInstance());
         encoders.put("bcrypt", new BCryptPasswordEncoder());
         encoders.put("scrypt", new SCryptPasswordEncoder());
 
-        return new DelegatingPasswordEncoder("bcrypt", encoders);*/
+        return new DelegatingPasswordEncoder("bcrypt", encoders);
         return NoOpPasswordEncoder.getInstance();
-    }
+    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf(c -> {
+        http.cors(c -> {
+            CorsConfigurationSource source = httpServletRequest -> {
+                CorsConfiguration config = new CorsConfiguration();
+                config.setAllowedOrigins(List.of("exemplo.com", "http://localhost:8080"));
+                config.setAllowedMethods(List.of("GET", "POST", "PUT","DELETE"));
+                return config;
+            };
+
+            c.configurationSource(source);
+        });
+
+        http.csrf().disable();
+        http.authorizeRequests().anyRequest().permitAll();
+        /*http.csrf(c -> {
             c.ignoringAntMatchers("/ciao");
             c.csrfTokenRepository(csrfTokenRepository());
         });
 
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests().anyRequest().permitAll();*/
 
         /*http.authorizeRequests()
                 .anyRequest().authenticated();
@@ -151,10 +167,10 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
                 //.denyAll();
     }
 
-    @Override
+    /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider);
-    }
+    }*/
 
     /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
