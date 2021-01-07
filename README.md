@@ -172,3 +172,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - Os tokens ficam armazenados na sessão HTTP, através do componente CsrfTokenRepository.
 - Token em sua maioria das vezes, são UUIDS, mas podemos personalizar.
 - A implementação do csrf (onde o csrffilter insere automaticamente no atributo _csrf da solicitação), onde o backend e frontend são juntos, é facil de desenvovler, mas em uma abordagem onde o front é separado, é um desafio.
+
+#### Detalhes da proteção csrf do spring
+- Por padrão, o token csrf gerado, fica armazenado na sessão http no servidor, dificultando a escalabilidade da aplicação.
+- Podemos personalizar o gerenciamento/guarda do token no servidor, fazendo uso da interface csrftoken e a classe csrftokenrepository.
