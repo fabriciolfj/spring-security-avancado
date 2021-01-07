@@ -183,3 +183,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
   - Access-Control-Allow-Origini--Specifies: Insiro os dominios estrangeiros que poderam acessar meus recursos. (somente sse ponto, meus endpotins podem receber chamadas de dominios diferentes da minha aplicacao).
   - Access-Control-Allow-Methods--Lets: digo quais métodos http os dominios estrangeiros, podem requerer.
   - Access-Control-Allow-Headers--Adds: limito para quais cabeçalhos você pode usar em uma solicitação específica.
+- Configurar o corsorigin dentro da aplicação, evita ataques como DDOS.
