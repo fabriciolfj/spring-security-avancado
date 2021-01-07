@@ -162,6 +162,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - Relembrando a definição:
   - CSRF -> ataque de solicitação falsa, ou seja, o usuario se autenticou no aplicativo e o invasor engana o mesmo, fazendo efetuar ações indevidas. (por padrão, spring ativa a proteção csrf para endpoints post). 
   - Proteção CSRF -> Spring security utiliza seu mecanismo de token, para proteger os endpotins de ataques csrf.
+  - Csrf ativado, apenas protege endpotins mutantes, como: post, put e delete.
 - Proteção CSRF é indicado quando paginas web fazem requisições ao seu endpoint.
 
 #### CsrfFilter
@@ -170,3 +171,11 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - O token é gerado na primeira solicitação GET (armazena usando a sessão como chave, exemplo:  JSESSIONID=18F11F1AD09A4CC3557B7A1D9FB167D7, 00951ba4-ae47-4b8b-8285-b1f4fcc1ddf4
 - Os tokens ficam armazenados na sessão HTTP, através do componente CsrfTokenRepository.
 - Token em sua maioria das vezes, são UUIDS, mas podemos personalizar.
+- A implementação do csrf (onde o csrffilter insere automaticamente no atributo _csrf da solicitação), onde o backend e frontend são juntos, é facil de desenvovler, mas em uma abordagem onde o front é separado, é um desafio.
+
+#### Detalhes da proteção csrf do spring
+- Por padrão, o token csrf gerado, fica armazenado na sessão http no servidor, dificultando a escalabilidade da aplicação.
+- Podemos personalizar o gerenciamento/guarda do token no servidor, fazendo uso das interfaces csrftoken e csrftokenrepository.
+
+#### Cors
+- Por padrão navegadores não permitem solicitações feitas para qualquer domínio que não seja aquele de onde o site é carregado.
