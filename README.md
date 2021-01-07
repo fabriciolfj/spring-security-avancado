@@ -179,3 +179,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 
 #### Cors
 - Por padrão navegadores não permitem solicitações feitas para qualquer domínio que não seja aquele de onde o site é carregado.
+- Para permitir chamadas entre dominios diferentes, existem alguns cabeçalhos que podem nos fornecer mecanismos para isso:
+  - Access-Control-Allow-Origini--Specifies: Insiro os dominios estrangeiros que poderam acessar meus recursos.
+  - Access-Control-Allow-Methods--Lets: digo quais métodos http os dominios estrangeiros, podem requerer.
+  - Access-Control-Allow-Headers--Adds: limito para quais cabeçalhos você pode usar em uma solicitação específica.
