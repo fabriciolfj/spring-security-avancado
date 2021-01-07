@@ -176,3 +176,6 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 #### Detalhes da proteção csrf do spring
 - Por padrão, o token csrf gerado, fica armazenado na sessão http no servidor, dificultando a escalabilidade da aplicação.
 - Podemos personalizar o gerenciamento/guarda do token no servidor, fazendo uso das interfaces csrftoken e csrftokenrepository.
+
+#### Cors
+- Por padrão navegadores não permitem solicitações feitas para qualquer domínio que não seja aquele de onde o site é carregado.
