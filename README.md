@@ -170,4 +170,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - O token é gerado na primeira solicitação GET (armazena usando a sessão como chave, exemplo:  JSESSIONID=18F11F1AD09A4CC3557B7A1D9FB167D7, 00951ba4-ae47-4b8b-8285-b1f4fcc1ddf4
 - Os tokens ficam armazenados na sessão HTTP, através do componente CsrfTokenRepository.
 - Token em sua maioria das vezes, são UUIDS, mas podemos personalizar.
-- A implementação do csrf (onde o csffilter insere automaticamente no atributo _cstf da solicitação), onde o backend e frontend são juntos, é facil de desenvovler, mas em uma abordagem onde o front é separado, é um desafio.
+- A implementação do csrf (onde o csrffilter insere automaticamente no atributo _csrf da solicitação), onde o backend e frontend são juntos, é facil de desenvovler, mas em uma abordagem onde o front é separado, é um desafio.
