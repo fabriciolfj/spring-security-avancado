@@ -1,1 +1,4 @@
 curl -XPOST -v -u john:12345 http://localhost:8080/hello -H 'Cookie:JSESSIONID=6DB1C2C6BAF6E7478C0AA0B4F298D178' -H 'X-CSRF-TOKEN:b6905940-45d5-4bcf-a99a-f24f2daaa42c'
+
+curl -H "X-IDENTIFIER:12345" -u fabricio:12345 http://localhost:8080/hello
+curl -XPOST -H "X-IDENTIFIER:12345" -H "X-CSRF-TOKEN:4556e472-4bea-44d1-a60d-59e78bb90d01" -u fabricio:12345 http://localhost:8080/hello

@@ -23,15 +23,13 @@ import java.util.concurrent.Executors;
 public class HelloWorldController {
 
     @PostMapping
-    public String hello() {
+    public String helloPost() {
         return "Hello post";
     }
 
     @GetMapping
-    public String hello(Authentication a) {
-        /*SecurityContext context = SecurityContextHolder.getContext();
-        Authentication a  = context.getAuthentication();*/
-        return "Hello, " ;
+    public String hello() {
+        return "Hello get";
     }
 
     @GetMapping("/bye")
@@ -59,7 +57,7 @@ public class HelloWorldController {
         }
     }
 
-    @GetMapping("/ciao")
+    @PostMapping("/ciao")
     public String ciao() throws Exception {
         Callable<String> task = () -> {
             SecurityContext context = SecurityContextHolder.getContext();

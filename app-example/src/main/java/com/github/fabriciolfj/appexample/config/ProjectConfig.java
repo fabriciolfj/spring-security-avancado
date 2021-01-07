@@ -22,6 +22,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -38,6 +39,11 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Bean
+    public CsrfTokenRepository csrfTokenRepository() {
+        return new CustomCsrfTokenRepository();
+    }
+
+    @Bean
     public InitializingBean initializingBean() {
         return () -> SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
@@ -52,15 +58,15 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     public UserDetailsService userDetailsService(final DataSource dataSource) {
         //return new JdbcUserDetailsManager(dataSource);
         var manager =  new InMemoryUserDetailsManager();
-        var user1 = User.withUsername("john")
+        var user1 = User.withUsername("fabricio")
                                         .password("12345")
-                                        .authorities("read", "premium")
+                                        .authorities("READ")
                                         //.roles("ADMIN")
                                         .build();
 
         var user2 = User.withUsername("jane")
                                     .password("12345")
-                                    .authorities("read")
+                                    .authorities("READ")
                                     //.roles("MANAGER")
                                     .build();
 
@@ -82,8 +88,21 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterAfter(new CsrfTokenLogger(), CsrfFilter.class)
-                .authorizeRequests().anyRequest().permitAll();
+        http.csrf(c -> {
+            c.ignoringAntMatchers("/ciao");
+            c.csrfTokenRepository(csrfTokenRepository());
+        });
+
+        http.authorizeRequests().anyRequest().permitAll();
+
+        /*http.authorizeRequests()
+                .anyRequest().authenticated();
+
+        http.formLogin()
+                .defaultSuccessUrl("/main", true);*/
+
+        /*http.addFilterAfter(new CsrfTokenLogger(), CsrfFilter.class)
+                .authorizeRequests().anyRequest().permitAll();*/
 
         /*http.addFilterAt(filter, BasicAuthenticationFilter.class) //colocar o filter na mesma posição
                 .authorizeRequests()
