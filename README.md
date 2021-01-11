@@ -192,3 +192,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
   - Podemos invalidar tokens sem invalidar credenciais.
   - Token também pode incluir autorizações.
   - Token ajuda a delegar a responsabilidade de autenticação para outro componente no sistema.
+  - JWT (json web token): é uma implementação do token, que possui 3 partes (cabeçalho, corpo e assinatura digital)
