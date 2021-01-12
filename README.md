@@ -184,3 +184,12 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
   - Access-Control-Allow-Methods--Lets: digo quais métodos http os dominios estrangeiros, podem requerer.
   - Access-Control-Allow-Headers--Adds: limito para quais cabeçalhos você pode usar em uma solicitação específica.
 - Configurar o corsorigin dentro da aplicação, evita ataques como DDOS.
+
+#### Tokens
+- O que são tokens? São representados por uma string e devem ser reconhecidos pela sua aplicação. Funciona como um cartão de acesso, onde o cliente de posse do mesmo, pode acessar alguns endpoints e outros não.
+- Qual a vantagem de utilizar token?
+  - Token ajudam a você evitar o compartilhamento de credencias a cada solicitiação.
+  - Podemos invalidar tokens sem invalidar credenciais.
+  - Token também pode incluir autorizações.
+  - Token ajuda a delegar a responsabilidade de autenticação para outro componente no sistema.
+  - JWT (json web token): é uma implementação do token, que possui 3 partes (cabeçalho, corpo e assinatura digital)
