@@ -70,7 +70,34 @@ O contrato que representa a solicitação de autenticação/autorização, chama
 
 ##### Detalhes do funcionamento do authentication provider
 - authentication manager receber o contrato authentication
-- verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar, tem um metodo que posso sobreescrever chamado suporte quando extendo o AuthenticationProvider).
+- verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar, tem um metodo que posso sobreescrever chamado suporte quando extendo o AuthenticationProvider, exemplo: class OtpAuthentication que extende UsernamePasswordAuthenticationToken, no suporte colocaria o codigo abaixo, assim o manager authentication iria procurar um provider com base neste suporte, que tenha essa classe, para executar).
+```
+@Component
+class OtpAuthenticationProvider : AuthenticationProvider {
+
+    @Autowired
+    private lateinit var proxy: AuthenticationServerProxy
+
+    override fun authenticate(authenticate: Authentication?): Authentication {
+        var username = authenticate!!.name
+        var code = authenticate.credentials as String
+        var result = proxy.sendOtp(username, code)
+
+        if (result) {
+            return OtpAuthentication(username, code)
+        }
+
+        throw BadCredentialsException("Bad credentials")
+    }
+
+    override fun supports(p0: Class<*>?): Boolean {
+        return OtpAuthentication::class.java.isAssignableFrom(p0);
+    }
+}
+
+```
+
+
 - caso authentication suporte, ele executa a validação, caso não, retorna null.
 - caso positivo, segue com a solicitação, caso negativo solta a exceção.
 
