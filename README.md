@@ -70,7 +70,34 @@ O contrato que representa a solicitação de autenticação/autorização, chama
 
 ##### Detalhes do funcionamento do authentication provider
 - authentication manager receber o contrato authentication
-- verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar).
+- verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar, tem um metodo que posso sobreescrever chamado suporte quando extendo o AuthenticationProvider, exemplo: class OtpAuthentication que extende UsernamePasswordAuthenticationToken, no suporte colocaria o codigo abaixo, assim o manager authentication iria procurar um provider com base neste suporte, que tenha essa classe, para executar).
+```
+@Component
+class OtpAuthenticationProvider : AuthenticationProvider {
+
+    @Autowired
+    private lateinit var proxy: AuthenticationServerProxy
+
+    override fun authenticate(authenticate: Authentication?): Authentication {
+        var username = authenticate!!.name
+        var code = authenticate.credentials as String
+        var result = proxy.sendOtp(username, code)
+
+        if (result) {
+            return OtpAuthentication(username, code)
+        }
+
+        throw BadCredentialsException("Bad credentials")
+    }
+
+    override fun supports(p0: Class<*>?): Boolean {
+        return OtpAuthentication::class.java.isAssignableFrom(p0);
+    }
+}
+
+```
+
+
 - caso authentication suporte, ele executa a validação, caso não, retorna null.
 - caso positivo, segue com a solicitação, caso negativo solta a exceção.
 
@@ -156,7 +183,12 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 
 ```
 #### Classes abstratas
-- Existem alguma classes abstradas, que implementam filter, como: OnPerRequestFilter (garante que o filtro seja chamado apenas uma vez por solicitação (nao funciona para solicitação assincrona, precisa mudar o comportamento via shouldNotFilterAsyncDispatch), por padrão, o spring não garante tal comportamento, caso queira, extenda essa classe).
+- Existem alguma classes abstradas, que implementam filter, como: OncePerRequestFilter (garante que o filtro seja chamado apenas uma vez por solicitação (nao funciona para solicitação assincrona, precisa mudar o comportamento via shouldNotFilterAsyncDispatch), por padrão, o spring não garante tal comportamento, caso queira, extenda essa classe).
+
+##### OncePerRequestFilter
+- Existe 2 métodos que podemos sobreescrever ao extender essa classe:
+  - shouldNotFilter: Colocamos uma condição para esse filtro ser executado, por exemplo: quero que seja executado para o endpoint /login
+  - doFilterInternal: método que é chamado ao cair nesse filtro, a requisição.
 
 ## Filters relacionados a CORS e CSRF
 - Relembrando a definição:
@@ -193,3 +225,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
   - Token também pode incluir autorizações.
   - Token ajuda a delegar a responsabilidade de autenticação para outro componente no sistema.
   - JWT (json web token): é uma implementação do token, que possui 3 partes (cabeçalho, corpo e assinatura digital)
+
+#### UsernamePasswordAuthenticationToken
+- Podemos extender a classe UsernamePasswordAuthenticationToken e fazer uso nos nossos providers authentication.
+- Existem 2 construtores nessa classe, o primeiro com apenas 2 strings (username e password), quando apenas populado, não diz que o usuário está autenticado. Já o construtor com 3 parâmetros (2 strings e uma collection com os grantedAuthority), quando populado, demonstra ao spring que o usuário está autenticado.
