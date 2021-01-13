@@ -70,7 +70,7 @@ O contrato que representa a solicitação de autenticação/autorização, chama
 
 ##### Detalhes do funcionamento do authentication provider
 - authentication manager receber o contrato authentication
-- verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar).
+- verifica entre os authentication providers (seja personalizado ou a implementação padrão), se consegui validar esse authentication (suportar, tem um metodo que posso sobreescrever chamado suporte quando extendo o AuthenticationProvider).
 - caso authentication suporte, ele executa a validação, caso não, retorna null.
 - caso positivo, segue com a solicitação, caso negativo solta a exceção.
 
