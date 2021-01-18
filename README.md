@@ -236,3 +236,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
  - Resource server: os recursos de hospedagem de aplicativos de propriedades dos usuários, recursos também podem ser dados dos usuários ou suas ações autorizadas.
  - User (também conhecido como resource owner) : indivíduo que possui recursos expostos pelo servidor de recursos.
  - Client: o aplicativo que acessa os recursos do usuário em seu nome. Ele usa sua identificação e secret para se identificar.
+ - Authorization server: o aplicativo que autoriza o cliente a acessar os recursos do usuário, expostos pelo resource server.
