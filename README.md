@@ -229,3 +229,6 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 #### UsernamePasswordAuthenticationToken
 - Podemos extender a classe UsernamePasswordAuthenticationToken e fazer uso nos nossos providers authentication.
 - Existem 2 construtores nessa classe, o primeiro com apenas 2 strings (username e password), quando apenas populado, não diz que o usuário está autenticado. Já o construtor com 3 parâmetros (2 strings e uma collection com os grantedAuthority), quando populado, demonstra ao spring que o usuário está autenticado.
+
+
+## OAUTH2
