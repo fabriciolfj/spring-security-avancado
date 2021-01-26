@@ -229,3 +229,14 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 #### UsernamePasswordAuthenticationToken
 - Podemos extender a classe UsernamePasswordAuthenticationToken e fazer uso nos nossos providers authentication.
 - Existem 2 construtores nessa classe, o primeiro com apenas 2 strings (username e password), quando apenas populado, não diz que o usuário está autenticado. Já o construtor com 3 parâmetros (2 strings e uma collection com os grantedAuthority), quando populado, demonstra ao spring que o usuário está autenticado.
+
+
+## OAUTH2
+### Componentes
+ - Resource server: os recursos de hospedagem de aplicativos de propriedades dos usuários, recursos também podem ser dados dos usuários ou suas ações autorizadas.
+ - User (também conhecido como resource owner) : indivíduo que possui recursos expostos pelo servidor de recursos.
+ - Client: o aplicativo que acessa os recursos do usuário em seu nome. Ele usa sua identificação e secret para se identificar.
+ - Authorization server: o aplicativo que autoriza o cliente a acessar os recursos do usuário, expostos pelo resource server.
+ 
+ ### Grants
+ - authorization code:
