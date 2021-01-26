@@ -244,3 +244,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ### Authorization server
 - utiliza quase toda lógica abordada acima, ou seja: authentication filter -> authentication manager -> authentication provider, userdetails, passwordencode e etc.
 - a diferença que a autenticação não fica no SecurityContext e sim no token store.
+- authorization server concede privilégios o a cliente, em nome do usuário. O cliente que usa os recursos.
