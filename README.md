@@ -240,3 +240,7 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
  
  ### Grants
  - authorization code:
+
+### Authorization server
+- utiliza quase toda lógica abordada acima, ou seja: authentication filter -> authentication manager -> authentication provider, userdetails, passwordencode e etc.
+- a diferença que a autenticação não fica no SecurityContext e sim no token store.
