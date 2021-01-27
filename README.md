@@ -249,3 +249,4 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 #### Registrando client no authorization server
 - contrato que define o cliente ClientDetails
 - contrato que define a busca do detalhes ClientDetailsService.
+- para armazenar em memória InMemoryClientDetailsService
