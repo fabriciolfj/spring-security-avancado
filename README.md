@@ -257,3 +257,10 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ```
 http://localhost:8080/oauth/authorize?response_type=code&client_id=client1&scope=read para pegar o code
 ```
+### Resource Server
+- Servidor aonde encontra-se os recursos que a aplicação cliente quer utilizar.
+
+#### Forma que o resource server valida o token
+- Ligando para o servidor de autorizaçao, para validar o token.
+- Utiliza-se um banco de dados comum, onde o servidor de autorização armazena os tokens e em seguida, o servidor de recursos pode acessar.
+- Utiliza-se assinaturas criptográficas, onde o servidor de autorização assina o token e o servidor de recursos valida a assinatura. (uso de jwtS)
