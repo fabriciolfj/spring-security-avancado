@@ -250,3 +250,10 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 - contrato que define o cliente ClientDetails
 - contrato que define a busca do detalhes ClientDetailsService.
 - para armazenar em memória InMemoryClientDetailsService
+
+##### Authorization Code
+- Exemplo de requisição:
+
+```
+http://localhost:8080/oauth/authorize?response_type=code&client_id=client1&scope=read para pegar o code
+```
