@@ -240,3 +240,27 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
  
  ### Grants
  - authorization code:
+
+### Authorization server
+- utiliza quase toda lógica abordada acima, ou seja: authentication filter -> authentication manager -> authentication provider, userdetails, passwordencode e etc.
+- a diferença que a autenticação não fica no SecurityContext e sim no token store.
+- authorization server concede privilégios o a cliente, em nome do usuário. O cliente que usa os recursos.
+
+#### Registrando client no authorization server
+- contrato que define o cliente ClientDetails
+- contrato que define a busca do detalhes ClientDetailsService.
+- para armazenar em memória InMemoryClientDetailsService
+
+##### Authorization Code
+- Exemplo de requisição:
+
+```
+http://localhost:8080/oauth/authorize?response_type=code&client_id=client1&scope=read para pegar o code
+```
+### Resource Server
+- Servidor aonde encontra-se os recursos que a aplicação cliente quer utilizar.
+
+#### Forma que o resource server valida o token
+- Ligando para o servidor de autorizaçao, para validar o token.
+- Utiliza-se um banco de dados comum, onde o servidor de autorização armazena os tokens e em seguida, o servidor de recursos pode acessar.
+- Utiliza-se assinaturas criptográficas, onde o servidor de autorização assina o token e o servidor de recursos valida a assinatura. (uso de jwtS)
