@@ -2,3 +2,5 @@ curl -XPOST -v -u john:12345 http://localhost:8080/hello -H 'Cookie:JSESSIONID=6
 
 curl -H "X-IDENTIFIER:12345" -u fabricio:12345 http://localhost:8080/hello
 curl -XPOST -H "X-IDENTIFIER:12345" -H "X-CSRF-TOKEN:4556e472-4bea-44d1-a60d-59e78bb90d01" -u fabricio:12345 http://localhost:8080/hello
+
+curl -H "Authorization: bearer cf0cd6ef-50ef-4912-b017-ab91d62b709d" "http://localhost:9090/hello"
