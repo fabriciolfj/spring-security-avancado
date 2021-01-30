@@ -257,6 +257,12 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ```
 http://localhost:8080/oauth/authorize?response_type=code&client_id=client1&scope=read para pegar o code
 ```
+
+- Exemplo de uri para verificar o token
+```
+http://localhost:8080/oauth/check_token?token=cf0cd6ef-50ef-4912-b017-ab91d62b709d
+```
+
 ### Resource Server
 - Servidor aonde encontra-se os recursos que a aplicação cliente quer utilizar.
 
@@ -264,3 +270,13 @@ http://localhost:8080/oauth/authorize?response_type=code&client_id=client1&scope
 - Ligando para o servidor de autorizaçao, para validar o token.
 - Utiliza-se um banco de dados comum, onde o servidor de autorização armazena os tokens e em seguida, o servidor de recursos pode acessar.
 - Utiliza-se assinaturas criptográficas, onde o servidor de autorização assina o token e o servidor de recursos valida a assinatura. (uso de jwtS)
+
+### Chaves
+- simétricas: chave de assinatura/validação do token, são os mesmos no resource server e authorization server
+- assimétricas: chave de assinatura/validação do token, são diferentes no resource server e authorization server
+ - 2 chaves, uma privada (usada pelo authorization server para assinar o token) e publica (usada pelo resource server para ler o token).
+- o authorization server pode expor a chave publica, atráves da url: 
+
+```
+curl -u resourceserver:resourceserversecret  http://localhost:8080/oauth/token_key
+```
