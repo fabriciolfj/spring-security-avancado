@@ -270,3 +270,7 @@ http://localhost:8080/oauth/check_token?token=cf0cd6ef-50ef-4912-b017-ab91d62b70
 - Ligando para o servidor de autorizaçao, para validar o token.
 - Utiliza-se um banco de dados comum, onde o servidor de autorização armazena os tokens e em seguida, o servidor de recursos pode acessar.
 - Utiliza-se assinaturas criptográficas, onde o servidor de autorização assina o token e o servidor de recursos valida a assinatura. (uso de jwtS)
+
+### Chaves
+- simétricas: chave de assinatura/validação do token, são os mesmos no resource server e authorization server
+- assimétricas: chave de assinatura/validação do token, são diferentes no resource server e authorization server
