@@ -257,6 +257,12 @@ Uma outra alternativa é gerenciar o pool de threads, através do DelegatingSecu
 ```
 http://localhost:8080/oauth/authorize?response_type=code&client_id=client1&scope=read para pegar o code
 ```
+
+- Exemplo de uri para verificar o token
+```
+http://localhost:8080/oauth/check_token?token=cf0cd6ef-50ef-4912-b017-ab91d62b709d
+```
+
 ### Resource Server
 - Servidor aonde encontra-se os recursos que a aplicação cliente quer utilizar.
 
