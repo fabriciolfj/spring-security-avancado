@@ -274,3 +274,4 @@ http://localhost:8080/oauth/check_token?token=cf0cd6ef-50ef-4912-b017-ab91d62b70
 ### Chaves
 - simétricas: chave de assinatura/validação do token, são os mesmos no resource server e authorization server
 - assimétricas: chave de assinatura/validação do token, são diferentes no resource server e authorization server
+ - 2 chaves, uma privada (usada pelo authorization server para assinar o token) e publica (usada pelo resource server para ler o token).
