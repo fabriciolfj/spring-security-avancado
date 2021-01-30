@@ -4,3 +4,12 @@ curl -H "X-IDENTIFIER:12345" -u fabricio:12345 http://localhost:8080/hello
 curl -XPOST -H "X-IDENTIFIER:12345" -H "X-CSRF-TOKEN:4556e472-4bea-44d1-a60d-59e78bb90d01" -u fabricio:12345 http://localhost:8080/hello
 
 curl -H "Authorization: bearer cf0cd6ef-50ef-4912-b017-ab91d62b709d" "http://localhost:9090/hello"
+
+curl -v -XPOST -u client:secret "http://localhost:8080/oauth/token?grant_type=password&username=fabricio&password=12345&scope=read"
+
+curl -H "Authorization:Bearer 5a7f6321-2d18-488d-835f-880fd61655b8" "http://localhost:9090/hello"
+
+gerando chave privada keytool -genkeypair -alias ssia -keyalg RSA -keypass ssia123 -keystore ssia.jks -storepass ssia123
+gerando chave public keytool -list -rfc --keystore ssia.jks | openssl x509 -inform pem -pubkey
+
+curl -u resourceserver:resourceserversecret  http://localhost:8080/oauth/token_key
