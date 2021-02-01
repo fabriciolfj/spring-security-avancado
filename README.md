@@ -287,3 +287,14 @@ curl -u resourceserver:resourceserversecret  http://localhost:8080/oauth/token_k
 - Podemos filtrar quem pode ver determinado método (prefiltering) ou ver o retorno do método (posfiltering).
 - Por trás, o spring uso aspectos para aplicar a segurança de métodos, ou seja, o oap intercepta a chamada do método e decide se continua ou não.
 - Obs para o posauthorization, caso esteja em um @transacional e ocorre falha na autorização, o processo não é revertido, pois o aspecto intercepta após o commit na da informação.
+
+#### Configuração
+- Por padrão a proteção por método vem desabilitada e para habilitar, segue o codigo de exemplo abaixo:
+
+```
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class ProjectConfig {
+}
+
+```
