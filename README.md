@@ -329,3 +329,4 @@ public class ProjectConfig {
 
 ##### Conceito de permissão
 - Quando temos uma lógica longa para aplicar, não é recomendavel utilizar SPEL(expressão do spring) para descreve-la e sim, inserir em uma classe apartada.
+- Conseguimos referenciar outra classe, usando hasPermission().
