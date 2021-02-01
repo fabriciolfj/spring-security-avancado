@@ -298,3 +298,15 @@ public class ProjectConfig {
 }
 
 ```
+
+#### Uso segurança por método
+```
+    @PreAuthorize("hasAuthority('write')")
+    public String getName() {
+        return "Fantastico";
+    }
+```
+- hasAuthority(): tenha uma determinada autorização.
+- hasAnyAuthority(): tenha ao menos uma dessas autorizações.
+- hasRole(): tenha uma determinada função
+- hasAnyRole(): tenha ao menos uma dessas funções.
