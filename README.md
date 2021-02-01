@@ -326,3 +326,6 @@ public class ProjectConfig {
         return records.get(name);
     }
 ```    
+
+##### Conceito de permissão
+- Quando temos uma lógica longa para aplicar, não é recomendavel utilizar SPEL(expressão do spring) para descreve-la e sim, inserir em uma classe apartada.
