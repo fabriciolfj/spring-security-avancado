@@ -310,3 +310,19 @@ public class ProjectConfig {
 - hasAnyAuthority(): tenha ao menos uma dessas autorizações.
 - hasRole(): tenha uma determinada função
 - hasAnyRole(): tenha ao menos uma dessas funções.
+
+##### Preauthorize exemplo
+```
+    @PreAuthorize("hasAuthority('write')")
+    public String getName() {
+        return "Fantastico";
+    }
+```
+
+##### Posauthorize exemplo
+```
+    @PostAuthorize("returnObject.roles.contains('reader')")
+    public Employee getBookDetails(String name) {
+        return records.get(name);
+    }
+```    
