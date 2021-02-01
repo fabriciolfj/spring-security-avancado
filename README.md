@@ -280,3 +280,8 @@ http://localhost:8080/oauth/check_token?token=cf0cd6ef-50ef-4912-b017-ab91d62b70
 ```
 curl -u resourceserver:resourceserversecret  http://localhost:8080/oauth/token_key
 ```
+
+### Global method security
+- Podemos definir a restrição de acessos a níveis de métodos, ou seja, não apenas a pontos finais.
+- Desta forma podemos dar privilégios a quem pode chamar determinado método (pre authorization) ou pegar o retorno de determinado método (pos authorization).
+- Podemos filtrar quem pode ver determinado método (prefiltering) ou ver o retorno do método (posfiltering).
