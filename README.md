@@ -280,3 +280,57 @@ http://localhost:8080/oauth/check_token?token=cf0cd6ef-50ef-4912-b017-ab91d62b70
 ```
 curl -u resourceserver:resourceserversecret  http://localhost:8080/oauth/token_key
 ```
+
+### Global method security
+- Podemos definir a restrição de acessos a níveis de métodos, ou seja, não apenas a pontos finais.
+- Desta forma podemos dar privilégios a quem pode chamar determinado método (pre authorization) ou pegar o retorno de determinado método (pos authorization).
+- Podemos filtrar quem pode ver determinado método (prefiltering) ou ver o retorno do método (posfiltering).
+- Por trás, o spring uso aspectos para aplicar a segurança de métodos, ou seja, o oap intercepta a chamada do método e decide se continua ou não.
+- Obs para o posauthorization, caso esteja em um @transacional e ocorre falha na autorização, o processo não é revertido, pois o aspecto intercepta após o commit na da informação.
+
+#### Configuração
+- Por padrão a proteção por método vem desabilitada e para habilitar, segue o codigo de exemplo abaixo:
+
+```
+@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class ProjectConfig {
+}
+
+```
+
+#### Uso segurança por método
+```
+    @PreAuthorize("hasAuthority('write')")
+    public String getName() {
+        return "Fantastico";
+    }
+```
+- hasAuthority(): tenha uma determinada autorização.
+- hasAnyAuthority(): tenha ao menos uma dessas autorizações.
+- hasRole(): tenha uma determinada função
+- hasAnyRole(): tenha ao menos uma dessas funções.
+
+##### Preauthorize exemplo
+```
+    @PreAuthorize("hasAuthority('write')")
+    public String getName() {
+        return "Fantastico";
+    }
+```
+
+##### Posauthorize exemplo
+```
+    @PostAuthorize("returnObject.roles.contains('reader')")
+    public Employee getBookDetails(String name) {
+        return records.get(name);
+    }
+```    
+
+##### Conceito de permissão
+- Quando temos uma lógica longa para aplicar, não é recomendavel utilizar SPEL(expressão do spring) para descreve-la e sim, inserir em uma classe apartada.
+- Conseguimos referenciar outra classe, usando hasPermission(), onde procurará quem implementa o contrato PermissionEvaluator.
+
+#### @Secure @RolesAllowed
+- não aconselho usar essas 2 anotações como substituição do @postauthorize/@preauthorize
+ 
