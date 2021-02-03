@@ -333,4 +333,9 @@ public class ProjectConfig {
 
 #### @Secure @RolesAllowed
 - não aconselho usar essas 2 anotações como substituição do @postauthorize/@preauthorize
+
+#### Filtro como segurança de método
+- Caso não queira impedir acesso ao método, mas obrigar os parâmetros se seguirem regras ou retornar apenas o necessário, podemos utilizar a abordagem de pré/posfiltro.
+- prefiltering: filtra os valores dos parâmetros antes de chamar o método, podemos aplicar somente se o método receber como parâmetro uma coleção de objetos.
+- posfiltering: filtra o valor retornado após a chamada do método, podemos aplicar somente se o método retornar uma coleção.
  
