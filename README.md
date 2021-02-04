@@ -339,3 +339,6 @@ public class ProjectConfig {
 - prefiltering: filtra os valores dos parâmetros antes de chamar o método, podemos aplicar somente se o método receber como parâmetro uma coleção de objetos.
 - posfiltering: filtra o valor retornado após a chamada do método, podemos aplicar somente se o método retornar uma coleção.
  
+## Keycloak
+- Primeiro cadastro de um client e seu scope
+- Adicione usuarios e suas funções.
