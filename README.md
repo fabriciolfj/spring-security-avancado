@@ -341,4 +341,5 @@ public class ProjectConfig {
  
 ## Keycloak
 - Primeiro cadastro de um client e seu scope
+- criar os mapeadores no client
 - Adicione usuarios e suas funções.
