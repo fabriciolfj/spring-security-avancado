@@ -342,5 +342,7 @@ public class ProjectConfig {
 ## Keycloak
 - Primeiro cadastro de um client e seu scope
 - criar os mapeadores no client
-- audience no client: define o destinatário pretendido do token de acesso.
+  - authorities: REALM_ROLE
+  - username:  userproperty
+  - audience no client: define o destinatário pretendido do token de acesso.
 - Adicione usuarios e suas funções.
