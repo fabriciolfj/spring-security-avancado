@@ -346,3 +346,6 @@ public class ProjectConfig {
   - username:  User Property
   - audience no client: define o destinatário pretendido do token de acesso. Audience
 - Adicione usuarios e suas funções.
+
+### jwk
+- O servidor de autorização usa uma chave privada para assinar o token. Quando ele assina o token. o servidor de autorização também adiciona um ID do par de teclas no cabeçalho do token. Para validar o token, o servidor de recursos chama um ponto final do servidor de autorização e recebe a chave pública para o ID encontrado no cabeçalho do token. O servidor de recursos usa essa chave pública para validar a assinatura do token.
