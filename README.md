@@ -349,3 +349,12 @@ public class ProjectConfig {
 
 ### jwk
 - O servidor de autorização usa uma chave privada para assinar o token. Quando ele assina o token. o servidor de autorização também adiciona um ID do par de teclas no cabeçalho do token. Para validar o token, o servidor de recursos chama um ponto final do servidor de autorização e recebe a chave pública para o ID encontrado no cabeçalho do token. O servidor de recursos usa essa chave pública para validar a assinatura do token.
+
+### SecurityExpressionHandler
+- Para utilizar expressões (SPEL) sobre o token jwt, para autorizações a nível de método.
+```
+    @Bean
+    public SecurityExpressionHandler<FilterInvocation> handler() {
+        return new OAuth2WebSecurityExpressionHandler();// para conseguirmos usar expressoes para pegar dados do token jwt
+    }
+```    
