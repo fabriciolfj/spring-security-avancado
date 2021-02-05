@@ -363,4 +363,5 @@ public class ProjectConfig {
 - Umas das principais mudanças está realizado ao contrato userdetails e a ausência de providers.
 - Fluxo:
   - AuthenticationWebFilter intercepta a requisição e delega para o ReactiveAuthenticationManager
-  - Não existe providers, o ReactiveAuthenticationManager implementa a logica de autenticação.
+  - Não existe providers, o ReactiveAuthenticationManager implementa a logica de autenticação, ou seja, autentica e retorna o objeto ao filtro e o filtro armazena a instancia do objeto no SecurityContext.
+  - O springsecuritycontext é gerenciado de forma diferente, pelo ReactiveAuthenticationManager.
