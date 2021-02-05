@@ -13,3 +13,13 @@ gerando chave privada keytool -genkeypair -alias ssia -keyalg RSA -keypass ssia1
 gerando chave public keytool -list -rfc --keystore ssia.jks | openssl x509 -inform pem -pubkey
 
 curl -u resourceserver:resourceserversecret  http://localhost:8080/oauth/token_key
+
+curl -XPOST "http://localhost:8080/auth/realms/master/protocol/openid-connect/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+--data-urlencode "grant_type=password" \
+--data-urlencode "username=root" \
+--data-urlencode "password=12345" \
+--data-urlencode "scope=fitnessapp" \
+--data-urlencode "client_id=fitnessapp"
+
+https://github.com/fabriciolfj/SpringSecurityInAction

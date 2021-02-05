@@ -9,3 +9,10 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "no"
     ports:
       - 3306:3306
+  keycloak: #http://localhost:8080/auth, http://localhost:8080/auth/realms/appsdeveloperblog/account/
+    image: quay.io/keycloak/keycloak:11.0.2
+    environment:
+      KEYCLOAK_USER: "admin"
+      KEYCLOAK_PASSWORD: "admin"
+    ports:
+      - 8080:8080
