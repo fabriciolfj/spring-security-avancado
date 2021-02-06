@@ -17,7 +17,7 @@ curl -u resourceserver:resourceserversecret  http://localhost:8080/oauth/token_k
 curl -XPOST "http://localhost:8080/auth/realms/master/protocol/openid-connect/token" \
 -H "Content-Type: application/x-www-form-urlencoded" \
 --data-urlencode "grant_type=password" \
---data-urlencode "username=root" \
+--data-urlencode "username=fabricio" \
 --data-urlencode "password=12345" \
 --data-urlencode "scope=fitnessapp" \
 --data-urlencode "client_id=fitnessapp"
