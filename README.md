@@ -5,6 +5,10 @@ Está relacionado a segurança nivel de aplicativo, ou seja, refere-se a tudo qu
 - DispatcherServlet é uma interface entre a requisição do cliente e o rest controller. Caso desejamos inserir alguma lógica de autenticação ou autorização, precisamos efetuar esse processo antes da chamada do dispatcherservlet.
 - Spring security prove filtros que posso colocar essa lógica antes ou depóis da chamada a uma dispatcherservlet.
 
+###### Abordagem
+- autenticação via filter: devemos implementar um filtro antes do dispatcherservlet
+- oauth2-resource-server: não precisa implementar um filtro, o mesmo utiliza uma classe chamada BearerTokenAutenthicationFilter para o processo.
+
 ##### Diferença entre autenticação e autorização.
 - autenticação: identificação do usuário, quando ele foi identificado pelo sistema, ele foi "autenticado".
 - autorização: após autenticado, o que o usuário pode fazer.
