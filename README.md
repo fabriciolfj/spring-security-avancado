@@ -1,6 +1,10 @@
 # Spring security
 Está relacionado a segurança nivel de aplicativo, ou seja, refere-se a tudo que o aplicativo deve fazer para proteger o ambiente que executa, bem como dados que processa e armazena.
 
+##### Visão geral
+- DispatcherServlet é uma interface entre a requisição do cliente e o rest controller. Caso desejamos inserir alguma lógica de autenticação ou autorização, precisamos efetuar esse processo antes da chamada do dispatcherservlet.
+- Spring security prove filtros que posso colocar essa lógica antes ou depóis da chamada a uma dispatcherservlet.
+
 ##### Diferença entre autenticação e autorização.
 - autenticação: identificação do usuário, quando ele foi identificado pelo sistema, ele foi "autenticado".
 - autorização: após autenticado, o que o usuário pode fazer.
