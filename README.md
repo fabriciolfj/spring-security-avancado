@@ -8,6 +8,7 @@ Está relacionado a segurança nivel de aplicativo, ou seja, refere-se a tudo qu
 ###### Abordagem
 - autenticação via filter: devemos implementar um filtro antes do dispatcherservlet
 - oauth2-resource-server: não precisa implementar um filtro, o mesmo utiliza uma classe chamada BearerTokenAutenthicationFilter para o processo.
+- obs: para filtros personalizados, devem ser registrados na classe que extende o websecurityconfigureradapter 
 
 ##### Diferença entre autenticação e autorização.
 - autenticação: identificação do usuário, quando ele foi identificado pelo sistema, ele foi "autenticado".
